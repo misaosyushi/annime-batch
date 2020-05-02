@@ -1,17 +1,16 @@
 package com.annime.batch.controller
 
-import com.annime.batch.service.SeasonService
+import com.annime.batch.usecase.SeasonServiceImpl
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
-import io.ktor.response.respondText
 import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.route
 
 fun Route.sampleController() {
 
-    val seasonService = SeasonService()
+    val seasonService = SeasonServiceImpl()
 
     route("/sample") {
         get {

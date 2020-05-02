@@ -7,8 +7,6 @@ DROP TABLE IF EXISTS `casts`;
 ---- create ----
 CREATE TABLE `season` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `year` int NOT NULL,
-  `season` varchar(5) NOT NULL,
   `season_text` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
@@ -43,10 +41,7 @@ CREATE TABLE `casts` (
 
 -- insert --
 INSERT INTO `season` VALUES
-(1, 2020, '春', '2020年春'),
-(2, 2020, '夏', '2020年夏'),
-(3, 2020, '秋', '2020年秋'),
-(4, 2020, '冬', '2020年冬');
+(1, '9999年春');
 
 INSERT INTO `annimes` VALUES
 (1, 1, 'テストアニメ', 'TV', 1, 'https://google.com', 'twitter name', 'https://google.com');
