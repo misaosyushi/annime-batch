@@ -47,8 +47,8 @@ fun Application.mymodule() {
 }
 
 fun insertData(annimes: Work) {
-
     val seasonService = SeasonServiceImpl()
-    annimes.works.map { seasonService.insert(it.seasonNameText) }
+    // TODO: 環境変数から2020-springをとってきて、seasonに保存。保存した戻り値でidを返せるが調査。
+    // TODO: seasonに保存したidをseason_idにセットしてannnimesに保存
 }
 
