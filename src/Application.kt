@@ -32,7 +32,7 @@ suspend fun main(args: Array<String>) {
         scheme = schemeName,
         host = hostName,
         port = portNumber,
-        path = "/v1/works?access_token=$accessToken&filter_season=$season"
+        path = "/v1/works?access_token=$accessToken&filter_season=$season&sort_watchers_count=desc"
     )
 
     val parsedWorks = Gson().fromJson(works, Work::class.java)

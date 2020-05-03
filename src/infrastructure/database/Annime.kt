@@ -3,7 +3,7 @@ package com.annime.batch.infrastructure.database
 import org.jetbrains.exposed.dao.*
 
 object AnnimeDao : LongIdTable("annimes") {
-    val annictId = long("annict_id")
+    val annictId = long("annict_id").uniqueIndex()
     val title = varchar("title", 100)
     val media = varchar("media", 10)
     val seasonId = integer("season_id")

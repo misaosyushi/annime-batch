@@ -13,7 +13,7 @@ CREATE TABLE `season` (
 
 CREATE TABLE `annimes` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `annict_id` int NOT NULL,
+  `annict_id` int NOT NULL UNIQUE,
   `title` varchar(100) NOT NULL,
   `media` varchar(10) NOT NULL,
   `season_id` int NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE `annimes` (
 
 CREATE TABLE `episodes` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `annime_id` int NOT NULL,
+  `annict_id` int NOT NULL,
   `number_text` varchar(10) NOT NULL,
   `title` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
@@ -33,7 +33,7 @@ CREATE TABLE `episodes` (
 
 CREATE TABLE `casts` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `annime_id` int NOT NULL,
+  `annict_id` int NOT NULL,
   `name` varchar(40) NOT NULL,
   `character` varchar(40) NOT NULL,
   PRIMARY KEY (`id`)
