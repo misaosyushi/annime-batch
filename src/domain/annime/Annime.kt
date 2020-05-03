@@ -3,10 +3,10 @@ package com.annime.batch.domain.annime
 import com.google.gson.annotations.SerializedName
 
 data class Work(
-    val works: List<Annime>
+    val works: List<Annict>
 )
 
-data class Annime(
+data class Annict(
     val id: Long,
     val title: String,
     @SerializedName("media_text")

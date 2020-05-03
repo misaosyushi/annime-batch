@@ -2,6 +2,7 @@ package com.annime.batch
 
 import com.annime.batch.controller.sampleController
 import com.annime.batch.domain.annime.Work
+import com.annime.batch.usecase.AnnimeServiceImpl
 import com.annime.batch.usecase.SeasonServiceImpl
 import com.google.gson.Gson
 import io.ktor.application.*
@@ -50,10 +51,12 @@ fun Application.mymodule() {
 
 fun insertData(annimes: Work, season: String) {
     val seasonService = SeasonServiceImpl()
-    println(annimes)
-    val savedSeason = seasonService.findBySeasonText(season)
-    val seasonId = seasonService.updateOrInsert(savedSeason, season).id
+    val annimeService = AnnimeServiceImpl()
+
+    val seasonId = seasonService.updateOrInsert(seasonService.findBySeasonText(season), season).id
     println(seasonId)
     // TODO: seasonに保存したidをseason_idにセットしてannnimesに保存
+
+    annimeService.insertAll(annimes.works, seasonId.value)
 }
 
