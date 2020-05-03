@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS `casts`;
 ---- create ----
 CREATE TABLE `season` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `season_text` varchar(10) NOT NULL,
+  `season_text` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
