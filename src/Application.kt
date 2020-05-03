@@ -1,6 +1,7 @@
 package com.annime.batch
 
 import com.annime.batch.controller.sampleController
+import com.annime.batch.domain.annime.Casts
 import com.annime.batch.domain.annime.Episodes
 import com.annime.batch.domain.annime.Work
 import com.annime.batch.usecase.AnnimeServiceImpl
@@ -39,15 +40,28 @@ suspend fun main(args: Array<String>) {
     val parsedWorks = Gson().fromJson(works, Work::class.java)
     insertData(parsedWorks, season)
 
+//    parsedWorks.works.map {
+//        val workId = it.id
+//        val episodes = client.get<String>(
+//            scheme = schemeName,
+//            host = hostName,
+//            port = portNumber,
+//            path = "/v1/episodes?access_token=$accessToken&filter_work_id=$workId&sort_sort_number=asc"
+//        )
+//        insertEpisodes(Gson().fromJson(episodes, Episodes::class.java), workId)
+//        // NOTE: 429エラー回避のため2秒待機させてる
+//        Thread.sleep(2000)
+//    }
+
     parsedWorks.works.map {
         val workId = it.id
         val episodes = client.get<String>(
             scheme = schemeName,
             host = hostName,
             port = portNumber,
-            path = "/v1/episodes?access_token=$accessToken&filter_work_id=$workId&sort_sort_number=asc"
+            path = "/v1/casts?access_token=$accessToken&filter_work_id=$workId&sort_sort_number=asc"
         )
-        insertEpisode(Gson().fromJson(episodes, Episodes::class.java), workId)
+        insertCasts(Gson().fromJson(episodes, Casts::class.java), workId)
         // NOTE: 429エラー回避のため2秒待機させてる
         Thread.sleep(2000)
     }
@@ -78,8 +92,12 @@ fun insertData(annimes: Work, season: String) {
     annimeService.updateOrInsert(annimes.works, seasonId.value)
 }
 
-fun insertEpisode(episodes: Episodes, workId: Long) {
+fun insertEpisodes(episodes: Episodes, workId: Long) {
     val episodeService = EpisodeServiceImpl()
     episodeService.updateOrInsert(episodes.episodes, workId)
+}
+
+fun insertCasts(casts: Casts, workId: Long) {
+    println(casts)
 }
 
