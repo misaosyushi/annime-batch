@@ -5,6 +5,7 @@ import com.annime.batch.domain.annime.Casts
 import com.annime.batch.domain.annime.Episodes
 import com.annime.batch.domain.annime.Work
 import com.annime.batch.usecase.AnnimeServiceImpl
+import com.annime.batch.usecase.CastServiceImple
 import com.annime.batch.usecase.EpisodeServiceImpl
 import com.annime.batch.usecase.SeasonServiceImpl
 import com.google.gson.Gson
@@ -98,6 +99,7 @@ fun insertEpisodes(episodes: Episodes, workId: Long) {
 }
 
 fun insertCasts(casts: Casts, workId: Long) {
-    println(casts)
+    val castService = CastServiceImple()
+    castService.updateOrInsert(casts.casts, workId)
 }
 

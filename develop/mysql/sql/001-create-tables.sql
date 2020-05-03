@@ -35,7 +35,7 @@ CREATE TABLE `casts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `annict_id` int NOT NULL,
   `name` varchar(40),
-  `character` varchar(40),
+  `character_name` varchar(40),
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 

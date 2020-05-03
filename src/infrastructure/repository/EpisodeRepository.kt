@@ -24,7 +24,7 @@ class EpisodeRepository {
         }
     }
 
-    fun update(episode: AnnictEpisode, annictId: Long, numberText: String): Episode {
+    fun update(episode: AnnictEpisode, annictId: Long, numberText: String) {
         val result = transaction {
             Episode.find { (EpisodeDao.annictId eq annictId) and (EpisodeDao.numberText eq numberText) }.single()
         }
@@ -32,6 +32,5 @@ class EpisodeRepository {
             result.title = episode.title
             result.numberText = episode.numberText
         }
-        return result
     }
 }
