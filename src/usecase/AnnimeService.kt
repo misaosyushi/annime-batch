@@ -22,9 +22,7 @@ class AnnimeServiceImpl : AnnimeService {
         annicts.map { repository.insert(it, savedSeasonId) }
     }
 
-    override fun findByAnnictId(annictId: Long): List<Annime> {
-        return repository.findByAnnictId(annictId)
-    }
+    override fun findByAnnictId(annictId: Long): List<Annime> = repository.findByAnnictId(annictId)
 
     override fun updateOrInsert(annicts: List<Annict>, savedSeasonId: Int) {
         annicts.map {

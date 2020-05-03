@@ -8,8 +8,8 @@ object AnnimeDao : LongIdTable("annimes") {
     val media = varchar("media", 10)
     val seasonId = integer("season_id")
     val officialSiteUrl = varchar("official_site_url", 400)
-    val twitterUserName = varchar("twitter_user_name", 100)
-    val imageUrl = varchar("image_url", 400)
+    val twitterUserName = varchar("twitter_user_name", 100).nullable()
+    val imageUrl = varchar("image_url", 400).nullable()
 }
 
 class Annime(id: EntityID<Long>) : LongEntity(id) {

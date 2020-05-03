@@ -13,7 +13,7 @@ CREATE TABLE `season` (
 
 CREATE TABLE `annimes` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `annict_id` int NOT NULL UNIQUE,
+  `annict_id` int NOT NULL,
   `title` varchar(100) NOT NULL,
   `media` varchar(10) NOT NULL,
   `season_id` int NOT NULL,
@@ -26,16 +26,16 @@ CREATE TABLE `annimes` (
 CREATE TABLE `episodes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `annict_id` int NOT NULL,
-  `number_text` varchar(10) NOT NULL,
-  `title` varchar(100) NOT NULL,
+  `number_text` varchar(10),
+  `title` varchar(100),
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE `casts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `annict_id` int NOT NULL,
-  `name` varchar(40) NOT NULL,
-  `character` varchar(40) NOT NULL,
+  `name` varchar(40),
+  `character` varchar(40),
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 

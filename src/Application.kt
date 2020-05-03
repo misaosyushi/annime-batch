@@ -4,6 +4,7 @@ import com.annime.batch.controller.sampleController
 import com.annime.batch.domain.annime.Episodes
 import com.annime.batch.domain.annime.Work
 import com.annime.batch.usecase.AnnimeServiceImpl
+import com.annime.batch.usecase.EpisodeServiceImpl
 import com.annime.batch.usecase.SeasonServiceImpl
 import com.google.gson.Gson
 import io.ktor.application.*
@@ -36,18 +37,20 @@ suspend fun main(args: Array<String>) {
     )
 
     val parsedWorks = Gson().fromJson(works, Work::class.java)
-//    parsedWorks.works.map {
-//        val workId = it.id
-//        val episodes = client.get<String>(
-//            scheme = schemeName,
-//            host = hostName,
-//            port = portNumber,
-//            path = "/v1/episodes?access_token=$accessToken&filter_work_id=$workId&sort_sort_number=asc"
-//        )
-//        insertEpisode(Gson().fromJson(episodes, Episodes::class.java), workId)
-//    }
-
     insertData(parsedWorks, season)
+
+    parsedWorks.works.map {
+        val workId = it.id
+        val episodes = client.get<String>(
+            scheme = schemeName,
+            host = hostName,
+            port = portNumber,
+            path = "/v1/episodes?access_token=$accessToken&filter_work_id=$workId&sort_sort_number=asc"
+        )
+        insertEpisode(Gson().fromJson(episodes, Episodes::class.java), workId)
+        // NOTE: 429エラー回避のため2秒待機させてる
+        Thread.sleep(2000)
+    }
 
     client.close()
 
@@ -73,11 +76,10 @@ fun insertData(annimes: Work, season: String) {
     val seasonId = seasonService.updateOrInsert(seasonService.findBySeasonText(season), season).id
 
     annimeService.updateOrInsert(annimes.works, seasonId.value)
-
-    // TODO: episodesとcasts
 }
 
 fun insertEpisode(episodes: Episodes, workId: Long) {
-    println(episodes)
+    val episodeService = EpisodeServiceImpl()
+    episodeService.updateOrInsert(episodes.episodes, workId)
 }
 
