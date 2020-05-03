@@ -55,8 +55,9 @@ fun insertData(annimes: Work, season: String) {
 
     val seasonId = seasonService.updateOrInsert(seasonService.findBySeasonText(season), season).id
     println(seasonId)
-    // TODO: seasonに保存したidをseason_idにセットしてannnimesに保存
 
-    annimeService.insertAll(annimes.works, seasonId.value)
+    annimeService.updateOrInsert(annimes.works, seasonId.value)
+
+    // TODO: episodesとcasts
 }
 
