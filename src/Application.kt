@@ -19,12 +19,14 @@ suspend fun main(args: Array<String>) {
     Database.connect("jdbc:mysql://0.0.0.0:13306/annime?useSSL=false", "com.mysql.jdbc.Driver", "annime", "annime")
 
     val client = HttpClient(Apache)
+    val accessToken = System.getenv("ACCESS_TOKEN")
+    val season = System.getenv("SEASON")
 
     val response = client.get<String>(
         scheme = "https",
         host = "api.annict.com",
         port = 443,
-        path = "/v1/works?access_token=hmQkhdC3P--93g5pRo6ukW7_B84Y8sqgEhWixhxts0c&filter_season=2020-spring"
+        path = "/v1/works?access_token=$accessToken&filter_season=$season"
     )
 
     insertData(Gson().fromJson(response, Work::class.java))
@@ -48,6 +50,7 @@ fun Application.mymodule() {
 
 fun insertData(annimes: Work) {
     val seasonService = SeasonServiceImpl()
+    println(annimes)
     // TODO: 環境変数から2020-springをとってきて、seasonに保存。保存した戻り値でidを返せるが調査。
     // TODO: seasonに保存したidをseason_idにセットしてannnimesに保存
 }
