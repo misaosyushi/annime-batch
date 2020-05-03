@@ -52,9 +52,8 @@ fun insertData(annimes: Work, season: String) {
     val seasonService = SeasonServiceImpl()
     println(annimes)
     val savedSeason = seasonService.findBySeasonText(season)
-    println(savedSeason)
-//    seasonService.insert(season)
-    // TODO: 環境変数から2020-springをとってきて、seasonに保存。保存した戻り値でidを返せるが調査。
+    val seasonId = seasonService.updateOrInsert(savedSeason, season).id
+    println(seasonId)
     // TODO: seasonに保存したidをseason_idにセットしてannnimesに保存
 }
 

@@ -11,7 +11,7 @@ interface SeasonService {
 
     fun findBySeasonText(season: String): List<Season>
 
-    fun updateOrInsert(season: String): Season
+    fun updateOrInsert(savedList: List<Season>, season: String): Season
 }
 
 class SeasonServiceImpl() : SeasonService {
@@ -26,7 +26,10 @@ class SeasonServiceImpl() : SeasonService {
 
     override fun findBySeasonText(season: String): List<Season> = repository.findBySeasonText(season)
 
-    override fun updateOrInsert(season: String): Season {
-        TODO("Not yet implemented")
+    override fun updateOrInsert(savedList: List<Season>, season: String): Season {
+        if (savedList.isEmpty()) {
+            return repository.insert(season)
+        }
+        return repository.update(season)
     }
 }
