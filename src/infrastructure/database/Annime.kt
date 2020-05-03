@@ -1,11 +1,8 @@
 package com.annime.batch.infrastructure.database
 
-import org.jetbrains.exposed.dao.EntityID
-import org.jetbrains.exposed.dao.IntEntity
-import org.jetbrains.exposed.dao.IntEntityClass
-import org.jetbrains.exposed.dao.IntIdTable
+import org.jetbrains.exposed.dao.*
 
-object AnnimeDao : IntIdTable("annimes") {
+object AnnimeDao : LongIdTable("annimes") {
     val annictId = long("annict_id")
     val title = varchar("title", 100)
     val media = varchar("media", 10)
@@ -15,8 +12,8 @@ object AnnimeDao : IntIdTable("annimes") {
     val imageUrl = varchar("image_url", 400)
 }
 
-class Annime(id: EntityID<Int>) : IntEntity(id) {
-    companion object : IntEntityClass<Annime>(
+class Annime(id: EntityID<Long>) : LongEntity(id) {
+    companion object : LongEntityClass<Annime>(
         AnnimeDao
     )
 
