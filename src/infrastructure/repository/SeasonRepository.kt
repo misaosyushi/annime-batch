@@ -6,15 +6,13 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 class SeasonRepository {
     fun findAll(): List<Season> {
-        var result: List<Season> = listOf()
-        transaction {
-            result = Season.all().toList()
+        return transaction {
+            Season.all().toList()
         }
-        return result
     }
 
-    fun insert(season: String) {
-        transaction {
+    fun insert(season: String): Season {
+        return transaction {
             Season.new {
                 seasonText = season
             }
@@ -22,15 +20,18 @@ class SeasonRepository {
     }
 
     fun findBySeasonText(season: String): List<Season> {
-        val result = transaction {
+        return transaction {
             Season.find { SeasonDao.seasonText eq season }.toList()
+        }
+    }
+
+    fun update(season: String): Season {
+        val result = transaction {
+            Season.find { SeasonDao.seasonText eq season }.single()
+        }
+        transaction {
+            result.seasonText = season
         }
         return result
     }
-
-//    fun update(season: String): Season {
-//        val result = findBySeasonText(season)
-//        result.seasonText = season
-//        return result
-//    }
 }
