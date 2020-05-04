@@ -42,8 +42,8 @@ class AnnictClient {
                 path = "/v1/episodes?access_token=$accessToken&filter_work_id=$workId&sort_sort_number=asc"
             )
             saveEpisodes(Gson().fromJson(episodes, Episodes::class.java), workId)
-            // NOTE: 429エラー回避のため2秒待機させてる
-            Thread.sleep(2000)
+            // NOTE: 429エラー回避のため3秒待機させてる
+            Thread.sleep(3000)
         }
 
         parsedWorks.works.map {
@@ -55,14 +55,14 @@ class AnnictClient {
                 path = "/v1/casts?access_token=$accessToken&filter_work_id=$workId&sort_sort_number=asc"
             )
             saveCasts(Gson().fromJson(episodes, Casts::class.java), workId)
-            // NOTE: 429エラー回避のため2秒待機させてる
-            Thread.sleep(2000)
+            // NOTE: 429エラー回避のため3秒待機させてる
+            Thread.sleep(3000)
         }
 
         client.close()
     }
 
-    fun saveAnnimes(annimes: Work, season: String) {
+    private fun saveAnnimes(annimes: Work, season: String) {
         val seasonService = SeasonServiceImpl()
         val annimeService = AnnimeServiceImpl()
 
@@ -71,12 +71,12 @@ class AnnictClient {
         annimeService.updateOrInsert(annimes.works, seasonId.value)
     }
 
-    fun saveEpisodes(episodes: Episodes, workId: Long) {
+    private fun saveEpisodes(episodes: Episodes, workId: Long) {
         val episodeService = EpisodeServiceImpl()
         episodeService.updateOrInsert(episodes.episodes, workId)
     }
 
-    fun saveCasts(casts: Casts, workId: Long) {
+    private fun saveCasts(casts: Casts, workId: Long) {
         val castService = CastServiceImple()
         castService.updateOrInsert(casts.casts, workId)
     }
