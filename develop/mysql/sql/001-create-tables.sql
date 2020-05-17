@@ -20,7 +20,10 @@ CREATE TABLE `annimes` (
   `official_site_url` varchar(400) NOT NULL,
   `twitter_user_name` varchar(100),
   `image_url` varchar(400),
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `annict_id` (`annict_id`),
+  KEY `annict_id_index` (`annict_id`),
+  KEY `season_id_index` (`season_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE `episodes` (
@@ -28,7 +31,8 @@ CREATE TABLE `episodes` (
   `annict_id` int NOT NULL,
   `number_text` varchar(10),
   `title` varchar(100),
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `annict_id_index` (`annict_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE `casts` (
@@ -36,19 +40,20 @@ CREATE TABLE `casts` (
   `annict_id` int NOT NULL,
   `name` varchar(40),
   `character_name` varchar(40),
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `annict_id_index` (`annict_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 -- insert --
-INSERT INTO `season` VALUES
-(1, '9999年春');
-
-INSERT INTO `annimes` VALUES
-(1, 1, 'テストアニメ', 'TV', 1, 'https://google.com', 'twitter name', 'https://google.com');
-
-INSERT INTO `episodes` VALUES
-(1, 1, '1話', 'エピソード1');
-
-INSERT INTO `casts` VALUES
-(1, 1, 'ほげ太郎', 'hogehoge');
+-- INSERT INTO `season` VALUES
+-- (1, '9999年春');
+--
+-- INSERT INTO `annimes` VALUES
+-- (1, 1, 'テストアニメ', 'TV', 1, 'https://google.com', 'twitter name', 'https://google.com');
+--
+-- INSERT INTO `episodes` VALUES
+-- (1, 1, '1話', 'エピソード1');
+--
+-- INSERT INTO `casts` VALUES
+-- (1, 1, 'ほげ太郎', 'hogehoge');
 
