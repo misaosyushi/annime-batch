@@ -19,14 +19,12 @@ class AnnictClient {
 
         val schemeName = "https"
         val hostName = "api.annict.com"
-        val portNumber = 443
         val accessToken = System.getenv("ACCESS_TOKEN")
         val season = System.getenv("SEASON")
 
         val works = client.get<String>(
             scheme = schemeName,
             host = hostName,
-            port = portNumber,
             path = "/v1/works?access_token=$accessToken&filter_season=$season&sort_watchers_count=desc"
         )
 
@@ -38,7 +36,6 @@ class AnnictClient {
             val episodes = client.get<String>(
                 scheme = schemeName,
                 host = hostName,
-                port = portNumber,
                 path = "/v1/episodes?access_token=$accessToken&filter_work_id=$workId&sort_sort_number=asc"
             )
             saveEpisodes(Gson().fromJson(episodes, Episodes::class.java), workId)
@@ -51,7 +48,6 @@ class AnnictClient {
             val episodes = client.get<String>(
                 scheme = schemeName,
                 host = hostName,
-                port = portNumber,
                 path = "/v1/casts?access_token=$accessToken&filter_work_id=$workId&sort_sort_number=asc"
             )
             saveCasts(Gson().fromJson(episodes, Casts::class.java), workId)
